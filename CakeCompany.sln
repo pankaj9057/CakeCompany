@@ -3,9 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CakeCompany", "CakeCompany\CakeCompany.csproj", "{B5A890D3-2109-4351-A886-1AF69A115C7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CakeCompany", "CakeCompany\CakeCompany.csproj", "{B5A890D3-2109-4351-A886-1AF69A115C7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CakeCompany.UnitTest", "CakeCompany.UnitTest\CakeCompany.UnitTest.csproj", "{150538A6-1730-4877-A0B1-933EED30552A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CakeCompany.Core", "CakeCompany.Dtos\CakeCompany.Core.csproj", "{4A099D3F-9F2B-4BE7-8AAB-7CFA9665AEA5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CakeCompany.Providers", "CakeCompany.Providers\CakeCompany.Providers.csproj", "{3C0F53C9-6514-4791-BDEF-EC9E5BDB6354}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CakeCompany.Application", "CakeCompany.Application\CakeCompany.Application.csproj", "{63706D7A-7416-4A82-B08F-20F6D2C22776}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CakeCompany.Tests", "CakeCompany.Tests\CakeCompany.Tests.csproj", "{4506FB60-2986-4332-BB18-8B34EF2CBC38}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A751EB7D-8A79-499B-B1FF-922A365783BC}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +28,22 @@ Global
 		{B5A890D3-2109-4351-A886-1AF69A115C7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5A890D3-2109-4351-A886-1AF69A115C7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5A890D3-2109-4351-A886-1AF69A115C7B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{150538A6-1730-4877-A0B1-933EED30552A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{150538A6-1730-4877-A0B1-933EED30552A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{150538A6-1730-4877-A0B1-933EED30552A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{150538A6-1730-4877-A0B1-933EED30552A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A099D3F-9F2B-4BE7-8AAB-7CFA9665AEA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A099D3F-9F2B-4BE7-8AAB-7CFA9665AEA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A099D3F-9F2B-4BE7-8AAB-7CFA9665AEA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A099D3F-9F2B-4BE7-8AAB-7CFA9665AEA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C0F53C9-6514-4791-BDEF-EC9E5BDB6354}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C0F53C9-6514-4791-BDEF-EC9E5BDB6354}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C0F53C9-6514-4791-BDEF-EC9E5BDB6354}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C0F53C9-6514-4791-BDEF-EC9E5BDB6354}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63706D7A-7416-4A82-B08F-20F6D2C22776}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63706D7A-7416-4A82-B08F-20F6D2C22776}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63706D7A-7416-4A82-B08F-20F6D2C22776}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63706D7A-7416-4A82-B08F-20F6D2C22776}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4506FB60-2986-4332-BB18-8B34EF2CBC38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4506FB60-2986-4332-BB18-8B34EF2CBC38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4506FB60-2986-4332-BB18-8B34EF2CBC38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4506FB60-2986-4332-BB18-8B34EF2CBC38}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
