@@ -36,8 +36,11 @@ public class ShipmentProvider : IShipmentProvider
         ArgumentNullException.ThrowIfNull(orders);
         if (!orders.Any())
         {
+            _logger.LogInformation("No order is available to process");
             return null;
         }
+
+        _logger.LogInformation($"{orders.Length} order(s) has been found and getting processed");
 
         //Get Product by Order
         var products = await GetProductListByOrders(orders);
@@ -49,7 +52,10 @@ public class ShipmentProvider : IShipmentProvider
         var isDelivered = await _deliveryProvider.Deliver(products, transport);
 
         if (isDelivered)
+        {
+            _logger.LogInformation($"{products.Count} product(s) has been shipped");
             return products;
+        }
         throw new Exception("Product Delivery has been failed");
     }
 
@@ -64,6 +70,7 @@ public class ShipmentProvider : IShipmentProvider
 
         foreach (var order in orders)
         {
+            _logger.LogInformation($"Order {order.Id} is getting processed");
             var estimatedBakeTime = await _cakeProvider.Check(order);
 
             //Cancelled and payment failure order check

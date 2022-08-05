@@ -2,11 +2,16 @@
 
 public class PaymentProviderTests
 {
+    private readonly Mock<ILogger<PaymentProvider>> _logger;
+    public PaymentProviderTests()
+    {
+        _logger = new Mock<ILogger<PaymentProvider>>();
+    }
     [Fact]
     public async Task PaymentProvider_HappyPath_Tests()
     {
         //Arrange
-        var paymentProvider = new PaymentProvider();
+        var paymentProvider = new PaymentProvider(_logger.Object);
 
         //Act
         var result = await paymentProvider.Process(new OrderBuilder().WithCake(Cake.RedVelvet).WithClientName("Test1")
@@ -22,7 +27,7 @@ public class PaymentProviderTests
     public async Task PaymentProvider_HappyPath_ImportantClinet_Tests()
     {
         //Arrange
-        var paymentProvider = new PaymentProvider();
+        var paymentProvider = new PaymentProvider(_logger.Object);
 
         //Act
         var result = await paymentProvider.Process(new OrderBuilder().WithCake(Cake.RedVelvet).WithClientName("Important")

@@ -15,7 +15,7 @@ public class Truck : ITruck
     }
     public async Task<bool> Deliver(List<Product> products)
     {
-        _logger.LogDebug($"List of product :{JsonSerializer.Serialize(products)} has been delivered by {nameof(Truck)}");
+        _logger.LogDebug($"Product(s) {JsonSerializer.Serialize(products)} has been delivered by {nameof(Truck)}");
         return await Task.FromResult(true);
     }
 }
