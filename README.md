@@ -4,6 +4,11 @@ Cacke Company is a sample solution to demonstrate code/architecture refactoring
 This Solution will demonstrate the following
 1.  Dependancy Injection and Mediator Pattern (Behavioural Pattern)
 2.  Clean/Onion Architecture
+3.  Logging
+4.  Exception Handling
+5.  SOLID Principles
+6.  Commenting
+7.  Builder Pattern for Unit Test Data
 
 To acheive and simplify this I have used below Nuget packages
 1.  Serilog
