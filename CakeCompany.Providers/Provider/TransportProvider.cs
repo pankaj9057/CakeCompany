@@ -12,19 +12,19 @@ public class TransportProvider : ITransportProvider
     /// </summary>
     /// <param name="products">List of product</param>
     /// <returns>Available transport name</returns>
-    public async Task<string> CheckForAvailability(List<Product> products)
+    public async Task<Type> CheckForAvailability(List<Product> products)
     {
         if (products.Sum(p => p.Quantity) < 1000)
         {
-            return await Task.FromResult(nameof(Van));
+            return await Task.FromResult(typeof(Van));
         }
 
         if (products.Sum(p => p.Quantity) > 1000
             && products.Sum(p => p.Quantity) < 5000)
         {
-            return await Task.FromResult(nameof(Truck));
+            return await Task.FromResult(typeof(Truck));
         }
 
-        return await Task.FromResult(nameof(Ship));
+        return await Task.FromResult(typeof(Ship));
     }
 }

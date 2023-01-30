@@ -7,32 +7,32 @@ namespace CakeCompany.Providers.Provider.Delivery;
 
 public class DeliveryProvider : IDeliveryProvider
 {
-    private readonly IVan _van;
-    private readonly IShip _ship;
-    private readonly ITruck _truck;
+    private readonly IDelivery<Van> _van;
+    private readonly IDelivery<Truck> _truck;
+    private readonly IDelivery<Ship> _ship;
 
-    public DeliveryProvider(IVan van, IShip ship, ITruck truck)
+    public DeliveryProvider(IDelivery<Van> van,IDelivery<Truck> truck,IDelivery<Ship> ship)
     {
         _van = van;
-        _ship = ship;
         _truck = truck;
+        _ship = ship;
     }
-    public async Task<bool> Deliver(List<Product> products, string transportType)
+    public async Task<bool> Deliver(List<Product> products, Type transportType)
     {
-        if (transportType == nameof(Van))
+        if (transportType == typeof(Van))
         {
             return await _van.Deliver(products);
         }
-
-        if (transportType == nameof(Truck))
-        {
-            return await _truck.Deliver(products);
-        }
-
-        if (transportType == nameof(Ship))
+        if (transportType == typeof(Ship))
         {
             return await _ship.Deliver(products);
         }
-        return false;
+
+        if (transportType == typeof(Truck))
+        {
+            return await _truck.Deliver(products);
+        }
+        return await Task.FromResult(false);
     }
+     
 }

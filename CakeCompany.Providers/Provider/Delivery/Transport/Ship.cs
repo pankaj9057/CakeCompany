@@ -5,7 +5,7 @@ using System.Text.Json;
 
 namespace CakeCompany.Providers.Provider.Delivery.Transport;
 
-public class Ship : IShip
+public class Ship : IDelivery<Ship>
 {
     private readonly ILogger<Ship> _logger;
 

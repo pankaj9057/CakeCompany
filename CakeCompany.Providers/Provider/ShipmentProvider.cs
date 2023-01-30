@@ -2,26 +2,18 @@
 using CakeCompany.Core.Interfaces;
 using Microsoft.Extensions.Logging;
 using System.Text.Json;
+using MediatR;
+using CakeCompany.Providers.Handlers.Orders.Query;
 
 namespace CakeCompany.Providers.Provider;
 
 public class ShipmentProvider : IShipmentProvider
-{
-    private readonly IOrderProvider _orderProvider;
-    private readonly ICakeProvider _cakeProvider;
-    private readonly IPaymentProvider _paymentProvider;
-    private readonly ITransportProvider _transportProvider;
-    private readonly IDeliveryProvider _deliveryProvider;
+{ 
+    private readonly IMediator _mediator;
     private readonly ILogger<ShipmentProvider> _logger;
-    public ShipmentProvider(IOrderProvider orderProvider, ICakeProvider cakeProvider,
-        IPaymentProvider paymentProvider, ITransportProvider transportProvider,
-        IDeliveryProvider deliveryProvider, ILogger<ShipmentProvider> logger)
+    public ShipmentProvider(IMediator mediator, ILogger<ShipmentProvider> logger)
     {
-        _orderProvider = orderProvider;
-        _cakeProvider = cakeProvider;
-        _paymentProvider = paymentProvider;
-        _transportProvider = transportProvider;
-        _deliveryProvider = deliveryProvider;
+        _mediator= mediator;
         _logger = logger;
     }
 
@@ -32,7 +24,7 @@ public class ShipmentProvider : IShipmentProvider
     public async Task<List<Product>?> GetShipmentAsync()
     {
         //Get latest orders
-        var orders = await _orderProvider.GetLatestOrders();
+        var orders = await _mediator.Send(new OrderRequest(),CancellationToken.None);
         ArgumentNullException.ThrowIfNull(orders);
         if (!orders.Any())
         {
@@ -45,11 +37,18 @@ public class ShipmentProvider : IShipmentProvider
         //Get Product by Order
         var products = await GetProductListByOrders(orders);
         //Check Transport Availability
-        var transport = await _transportProvider.CheckForAvailability(products);
+        var transport = await _mediator.Send(new TransportRequest
+        {
+            products = products
+        }, CancellationToken.None);
 
 
         //Deliver the product by transport
-        var isDelivered = await _deliveryProvider.Deliver(products, transport);
+        var isDelivered = await _mediator.Send(new DeliveryRequest
+        {
+            productList= products,
+            transportType = transport
+        }, CancellationToken.None);
 
         if (isDelivered)
         {
@@ -71,18 +70,18 @@ public class ShipmentProvider : IShipmentProvider
         foreach (var order in orders)
         {
             _logger.LogInformation($"Order {order.Id} is getting processed");
-            var estimatedBakeTime = await _cakeProvider.Check(order);
+            var estimatedBakeTime = await _mediator.Send(new CheckCakeRequest { order = order }, CancellationToken.None);
 
             //Cancelled and payment failure order check
             if ((estimatedBakeTime > order.EstimatedDeliveryTime)
                 ||
-                !(await _paymentProvider.Process(order)).IsSuccessful)
+                !(await _mediator.Send(new PaymentRequest { order = order}, CancellationToken.None)).IsSuccessful)
             {
                 _logger.LogDebug($"Excluded Order: {JsonSerializer.Serialize(order)}");
                 continue;
             }
 
-            var product = await _cakeProvider.Bake(order);
+            var product = await _mediator.Send(new BakeCakeRequest { order=order}, CancellationToken.None);
             products.Add(product);
         }
 

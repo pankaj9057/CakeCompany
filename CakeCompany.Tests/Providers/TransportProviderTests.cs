@@ -4,7 +4,7 @@ public class TransportProviderTests
 {
     [Theory]
     [MemberData(nameof(TestData))]
-    public async Task TransportProvider_HappyPath_Tests(double quantity, string expected)
+    public async Task TransportProvider_HappyPath_Tests(double quantity, Type expected)
     {
         //Arrange
         var transportProvider = new TransportProvider();
@@ -32,8 +32,8 @@ public class TransportProviderTests
     //Test data
     public static IEnumerable<object[]> TestData()
     {
-        yield return new object[] { 100, nameof(Van) };
-        yield return new object[] { 1000, nameof(Truck) };
-        yield return new object[] { 10000, nameof(Ship) };
+        yield return new object[] { 100, typeof(Van) };
+        yield return new object[] { 1000, typeof(Truck) };
+        yield return new object[] { 10000, typeof(Ship) };
     }
 }

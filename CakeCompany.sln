@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CakeCompany.Providers", "Ca
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CakeCompany.Application", "CakeCompany.Application\CakeCompany.Application.csproj", "{63706D7A-7416-4A82-B08F-20F6D2C22776}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CakeCompany.Tests", "CakeCompany.Tests\CakeCompany.Tests.csproj", "{4506FB60-2986-4332-BB18-8B34EF2CBC38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CakeCompany.Tests", "CakeCompany.Tests\CakeCompany.Tests.csproj", "{4506FB60-2986-4332-BB18-8B34EF2CBC38}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A751EB7D-8A79-499B-B1FF-922A365783BC}"
 	ProjectSection(SolutionItems) = preProject

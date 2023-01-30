@@ -4,5 +4,5 @@ namespace CakeCompany.Core.Interfaces;
 
 public interface ITransportProvider
 {
-    Task<string> CheckForAvailability(List<Product> products);
+    Task<Type> CheckForAvailability(List<Product> products);
 }

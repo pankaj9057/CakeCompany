@@ -1,6 +1,7 @@
 ﻿using CakeCompany.Application.Shipment;
 using CakeCompany.Core.Interfaces;
 using CakeCompany.Core.Interfaces.Transport;
+using CakeCompany.Providers.Handlers.Orders.Query;
 using CakeCompany.Providers.Provider;
 using CakeCompany.Providers.Provider.Delivery;
 using CakeCompany.Providers.Provider.Delivery.Transport;
@@ -14,9 +15,9 @@ using System.Text.Json;
 //Inject all service dependency
 var serviceProvider = new ServiceCollection()
           .AddScoped<IMediator, Mediator>()
-          .AddScoped<IVan, Van>()
-          .AddScoped<IShip, Ship>()
-          .AddScoped<ITruck, Truck>()
+          .AddScoped<IDelivery<Van>, Van>()
+          .AddScoped<IDelivery<Ship>, Ship>()
+          .AddScoped<IDelivery<Truck>, Truck>()
           .AddScoped<ICakeProvider, CakeProvider>()
           .AddScoped<IDeliveryProvider, DeliveryProvider>()
           .AddScoped<IOrderProvider, OrderProvider>()
@@ -24,7 +25,16 @@ var serviceProvider = new ServiceCollection()
           .AddScoped<ITransportProvider, TransportProvider>()
           .AddScoped<IShipmentProvider, ShipmentProvider>()
           .AddScoped<IDateTimeProvider, DateTimeProvider>()
+          //Application Handler
           .AddMediatR(typeof(ShipmentHandler).Assembly)
+          //Providers Handler
+          .AddMediatR(typeof(BakeCakeHandler).Assembly)
+          .AddMediatR(typeof(CheckCakeHandler).Assembly)
+          .AddMediatR(typeof(DeliveryHandler).Assembly)
+          .AddMediatR(typeof(OrderHandler).Assembly)
+          .AddMediatR(typeof(OrderCommandHandler).Assembly)
+          .AddMediatR(typeof(PaymentHandler).Assembly)
+          .AddMediatR(typeof(TransportHandler).Assembly)
           .AddLogging(configure => configure.AddSerilog())
           .BuildServiceProvider();
 
